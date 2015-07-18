@@ -63,7 +63,7 @@
   
     <article id="post-iot-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/iot-2/uncategorized/cic97jfn60001z0z2oguokw9o/" class="article-date">
+    <a href="/horitait/2015/07/19/iot-2/uncategorized/cic97zpde0000bfz26c4leklt/" class="article-date">
   <time datetime="2015-07-18T15:16:20.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/iot-2/uncategorized/cic97jfn60001z0z2oguokw9o/">iot-2</a>
+      <a class="article-title" href="/horitait/2015/07/19/iot-2/uncategorized/cic97zpde0000bfz26c4leklt/">iot-2</a>
     </h1>
   
 
@@ -87,7 +87,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/iot-2/uncategorized/cic97jfn60001z0z2oguokw9o/" data-id="cic97jfn60001z0z2oguokw9o" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/iot-2/uncategorized/cic97zpde0000bfz26c4leklt/" data-id="cic97zpde0000bfz26c4leklt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -99,7 +99,7 @@
   
     <article id="post-iot-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/iot-1/uncategorized/cic97jfn80002z0z2ncxdl6qi/" class="article-date">
+    <a href="/horitait/2015/07/19/iot-1/uncategorized/cic97zpdk0001bfz2orya6mci/" class="article-date">
   <time datetime="2015-07-18T15:16:17.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -111,7 +111,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/iot-1/uncategorized/cic97jfn80002z0z2ncxdl6qi/">iot-1</a>
+      <a class="article-title" href="/horitait/2015/07/19/iot-1/uncategorized/cic97zpdk0001bfz2orya6mci/">iot-1</a>
     </h1>
   
 
@@ -123,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/iot-1/uncategorized/cic97jfn80002z0z2ncxdl6qi/" data-id="cic97jfn80002z0z2ncxdl6qi" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/iot-1/uncategorized/cic97zpdk0001bfz2orya6mci/" data-id="cic97zpdk0001bfz2orya6mci" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +135,7 @@
   
     <article id="post-iot-0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/iot-0/uncategorized/cic97jfmj0000z0z2rooiqwq6/" class="article-date">
+    <a href="/horitait/2015/07/19/iot-0/uncategorized/cic97zpdn0002bfz2krqxxsoi/" class="article-date">
   <time datetime="2015-07-18T15:16:11.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -147,7 +147,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/iot-0/uncategorized/cic97jfmj0000z0z2rooiqwq6/">iot-0</a>
+      <a class="article-title" href="/horitait/2015/07/19/iot-0/uncategorized/cic97zpdn0002bfz2krqxxsoi/">iot-0</a>
     </h1>
   
 
@@ -155,11 +155,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="簡易sshトンネルの作成方法">簡易sshトンネルの作成方法</h2><h4 id="webターミナルエミュレータの取得・設定・起動">webターミナルエミュレータの取得・設定・起動</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/krishnasrinivas/wetty.git</span><br><span class="line"><span class="built_in">cd</span> wetty</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment">#basic 認証</span></span><br><span class="line">npm install basic-auth-connect</span><br><span class="line"></span><br><span class="line"><span class="comment">##############################################################</span></span><br><span class="line"><span class="comment">#wetty/app.jsに以下を追加</span></span><br><span class="line"><span class="comment">#var basicAuth = require('basic-auth-connect');</span></span><br><span class="line"><span class="comment">#app.use(basicAuth('username', 'password')); （パスワード設定）</span></span><br><span class="line"><span class="comment">##############################################################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#起動</span></span><br><span class="line">node app.js -p <span class="number">4400</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#起動（自前認証局を使う場合）</span></span><br><span class="line"><span class="comment">#openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 30000 -nodes</span></span><br><span class="line"><span class="comment">#node app.js --sslkey key.pem --sslcert cert.pem -p 4400</span></span><br></pre></td></tr></table></figure>
+<h4 id="ngrokの取得・圧縮">ngrokの取得・圧縮</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.ngrok.com/ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line">unzip ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#ポート4400の外部解放</span></span><br><span class="line">./ngrok http -bind-tls=<span class="literal">true</span> <span class="number">4400</span></span><br></pre></td></tr></table></figure>
+<h4 id="確認">確認</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open <span class="operator">-a</span> <span class="string">"Google Chrome"</span> $でてきたURL</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/iot-0/uncategorized/cic97jfmj0000z0z2rooiqwq6/" data-id="cic97jfmj0000z0z2rooiqwq6" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/iot-0/uncategorized/cic97zpdn0002bfz2krqxxsoi/" data-id="cic97zpdn0002bfz2krqxxsoi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,15 +199,15 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/07/19/iot-2/uncategorized/cic97jfn60001z0z2oguokw9o/">iot-2</a>
+            <a href="/horitait/2015/07/19/iot-2/uncategorized/cic97zpde0000bfz26c4leklt/">iot-2</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/iot-1/uncategorized/cic97jfn80002z0z2ncxdl6qi/">iot-1</a>
+            <a href="/horitait/2015/07/19/iot-1/uncategorized/cic97zpdk0001bfz2orya6mci/">iot-1</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/iot-0/uncategorized/cic97jfmj0000z0z2rooiqwq6/">iot-0</a>
+            <a href="/horitait/2015/07/19/iot-0/uncategorized/cic97zpdn0002bfz2krqxxsoi/">iot-0</a>
           </li>
         
       </ul>
