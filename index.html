@@ -63,7 +63,7 @@
   
     <article id="post-20150719-python-control-beginner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9dbzgf0004luz22lwm0g7q/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9hhjjm0004y8z2jmh2wn6o/" class="article-date">
   <time datetime="2015-07-18T18:07:38.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9dbzgf0004luz22lwm0g7q/">python入門①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9hhjjm0004y8z2jmh2wn6o/">python入門①</a>
     </h1>
   
 
@@ -84,7 +84,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h1 id="主要なライブラリのインストール">主要なライブラリのインストール</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo easy_install pip</span><br><span class="line">pip install sympy </span><br><span class="line">pip install pylab</span><br></pre></td></tr></table></figure>
+<h1 id="主要なライブラリのインストール">主要なライブラリのインストール</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo easy_install pip</span><br><span class="line">pip install sympy </span><br><span class="line">pip install pylab </span><br><span class="line">pip install numpy</span><br></pre></td></tr></table></figure>
 <h1 id="簡単なプログラムの実装①">簡単なプログラムの実装①</h1><h2 id="行列演算">行列演算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#行列演算の為のライブラリの読み込み</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">m = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">4</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="keyword">print</span> m</span><br><span class="line"><span class="keyword">print</span> m - m</span><br><span class="line"><span class="keyword">print</span> m + m </span><br><span class="line"><span class="keyword">print</span> m * m</span><br></pre></td></tr></table></figure>
 <h2 id="グラフの描画">グラフの描画</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> plt</span><br><span class="line"> </span><br><span class="line"><span class="comment">#“linspace(開始値，終了値，分割数)”で，線形数列を作成。</span></span><br><span class="line">x = linspace(-pi, pi, <span class="number">100</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#数列をsinの引数に入れると，sin(x)の数列が生成される。</span></span><br><span class="line">y = sin(x)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#とりあえずplot。</span></span><br><span class="line">plt.plot(x,y)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#plotした関数を表示する。</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <h2 id="ファイルの書き込み">ファイルの書き込み</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*- </span></span><br><span class="line">f = open(<span class="string">"sample.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line">f.write(<span class="string">"Pythonでファイルに書き込みました！"</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
@@ -93,7 +93,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9dbzgf0004luz22lwm0g7q/" data-id="cic9dbzgf0004luz22lwm0g7q" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9hhjjm0004y8z2jmh2wn6o/" data-id="cic9hhjjm0004y8z2jmh2wn6o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -105,7 +105,7 @@
   
     <article id="post-20150719-git-beginner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9dbzfr0000luz2fb1d65hr/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9hhjiw0000y8z2adqkmdl9/" class="article-date">
   <time datetime="2015-07-18T17:33:50.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -117,7 +117,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9dbzfr0000luz2fb1d65hr/">git 入門①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9hhjiw0000y8z2adqkmdl9/">git 入門①</a>
     </h1>
   
 
@@ -132,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9dbzfr0000luz2fb1d65hr/" data-id="cic9dbzfr0000luz2fb1d65hr" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9hhjiw0000y8z2adqkmdl9/" data-id="cic9hhjiw0000y8z2adqkmdl9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +144,7 @@
   
     <article id="post-20150719-github-initial" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9dbzgh0005luz2dkigsep0/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9hhjjo0005y8z2jdkehh32/" class="article-date">
   <time datetime="2015-07-18T17:08:34.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -156,7 +156,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9dbzgh0005luz2dkigsep0/">githubの初期設定①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9hhjjo0005y8z2jdkehh32/">githubの初期設定①</a>
     </h1>
   
 
@@ -173,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9dbzgh0005luz2dkigsep0/" data-id="cic9dbzgh0005luz2dkigsep0" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9hhjjo0005y8z2jdkehh32/" data-id="cic9hhjjo0005y8z2jdkehh32" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
@@ -187,7 +187,7 @@
   
     <article id="post-20150719-web-term" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9dbzfz0001luz2y1miporj/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9hhjj50001y8z2izvjgjvw/" class="article-date">
   <time datetime="2015-07-18T17:08:17.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -199,7 +199,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9dbzfz0001luz2y1miporj/">簡易sshトンネルの作成方法</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9hhjj50001y8z2izvjgjvw/">簡易sshトンネルの作成方法</a>
     </h1>
   
 
@@ -212,13 +212,13 @@
 <h4 id="ngrokの設定(httpsトンネル用)">ngrokの設定(httpsトンネル用)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.ngrok.com/ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line">unzip ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#ポート4400の外部解放</span></span><br><span class="line">./ngrok http -bind-tls=<span class="literal">true</span> <span class="number">4400</span></span><br></pre></td></tr></table></figure>
 <h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open <span class="operator">-a</span> <span class="string">"Google Chrome"</span> $ターミナルに表示されたURL</span><br></pre></td></tr></table></figure>
 <p><br></p>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9dbzfz0001luz2y1miporj/wetty-terminal.png" alt="chrome画面の一部" title="chrome画面の一部">
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9hhjj50001y8z2izvjgjvw/wetty-terminal.png" alt="chrome画面の一部" title="chrome画面の一部">
 <p>の様な画面が表示されれば成功</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cic9dbzfz0001luz2y1miporj/" data-id="cic9dbzfz0001luz2y1miporj" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cic9hhjj50001y8z2izvjgjvw/" data-id="cic9hhjj50001y8z2izvjgjvw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
@@ -264,19 +264,19 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9dbzgf0004luz22lwm0g7q/">python入門①</a>
+            <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9hhjjm0004y8z2jmh2wn6o/">python入門①</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9dbzfr0000luz2fb1d65hr/">git 入門①</a>
+            <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9hhjiw0000y8z2adqkmdl9/">git 入門①</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9dbzgh0005luz2dkigsep0/">githubの初期設定①</a>
+            <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9hhjjo0005y8z2jdkehh32/">githubの初期設定①</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9dbzfz0001luz2y1miporj/">簡易sshトンネルの作成方法</a>
+            <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9hhjj50001y8z2izvjgjvw/">簡易sshトンネルの作成方法</a>
           </li>
         
       </ul>
