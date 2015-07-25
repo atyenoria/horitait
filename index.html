@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2015-07-19-shell-beginnner" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-iot-1-6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cic9wgi5l0000lhz2h6f8hqwv/" class="article-date">
-  <time datetime="2015-07-19T02:21:50.000Z" itemprop="datePublished">2015-07-19</time>
+    <a href="/horitait/2015/07/18/iot-1-6/uncategorized/cic96t86w00018lz21q3km0ae/" class="article-date">
+  <time datetime="2015-07-18T14:54:11.000Z" itemprop="datePublished">2015-07-18</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cic9wgi5l0000lhz2h6f8hqwv/">シェルスクリプト基礎①</a>
+      <a class="article-title" href="/horitait/2015/07/18/iot-1-6/uncategorized/cic96t86w00018lz21q3km0ae/">iot-1-6</a>
     </h1>
   
 
@@ -83,16 +83,122 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>sh test1.shで実行</p>
-<h2 id="基本的なコマンドの挙動の確認">基本的なコマンドの挙動の確認</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#test1.sh</span></span><br><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="comment">#現在のディレクトリの位置を保存</span></span><br><span class="line"><span class="built_in">pushd</span> .</span><br><span class="line"></span><br><span class="line"><span class="comment">#新規ディレクトリ作成</span></span><br><span class="line">mkdir sample</span><br><span class="line"></span><br><span class="line"><span class="comment">#ディレクトリ移動</span></span><br><span class="line"><span class="built_in">cd</span> sample</span><br><span class="line"></span><br><span class="line"><span class="comment">#ファイル作成のためのループを回す</span></span><br><span class="line"><span class="keyword">for</span> (( i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ )); <span class="keyword">do</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">#ファイルの作成</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$i</span>"</span> &gt; <span class="string">"test"</span>+<span class="variable">$i</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">#行追加</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$i</span>+<span class="variable">$i</span>"</span> &gt;&gt; <span class="string">"test"</span>+<span class="variable">$i</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">#行追加</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"<span class="variable">$i</span>+<span class="variable">$i</span>+<span class="variable">$i</span>"</span> &gt;&gt; <span class="string">"test"</span>+<span class="variable">$i</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#    #ヒアドキュメントで文章追加</span></span><br><span class="line"><span class="comment"># cat &lt;&lt; EOS  &gt;&gt; "test"+$i</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ここから</span></span><br><span class="line"><span class="comment"># ヒアドキュメントで入る文章</span></span><br><span class="line"><span class="comment"># EOS</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ls -la &gt; ditail_sample_directory</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#pushdで保存したディレクトリに戻る</span></span><br><span class="line"><span class="built_in">popd</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># cd sample</span></span><br><span class="line"><span class="comment"># #ファイル削除のためのループを回す</span></span><br><span class="line"><span class="comment"># for (( i = 0; i &lt; 10; i++ )); do</span></span><br><span class="line"><span class="comment">#    rm "test"+$i</span></span><br><span class="line"><span class="comment"># done</span></span><br></pre></td></tr></table></figure>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cic9wgi5l0000lhz2h6f8hqwv/" data-id="cic9wgi5l0000lhz2h6f8hqwv" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/18/iot-1-6/uncategorized/cic96t86w00018lz21q3km0ae/" data-id="cic96t86w00018lz21q3km0ae" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iot-1-5-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/07/18/iot-1-5-1/uncategorized/cic96t87c00038lz2l60w8f5r/" class="article-date">
+  <time datetime="2015-07-18T14:49:57.000Z" itemprop="datePublished">2015-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/07/18/iot-1-5-1/uncategorized/cic96t87c00038lz2l60w8f5r/">iot-1-5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/18/iot-1-5-1/uncategorized/cic96t87c00038lz2l60w8f5r/" data-id="cic96t87c00038lz2l60w8f5r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iot-1-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/07/18/iot-1-5/uncategorized/cic96t86z00028lz2t8li4lfk/" class="article-date">
+  <time datetime="2015-07-18T14:49:11.000Z" itemprop="datePublished">2015-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/07/18/iot-1-5/uncategorized/cic96t86z00028lz2t8li4lfk/">iot-1-5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/18/iot-1-5/uncategorized/cic96t86z00028lz2t8li4lfk/" data-id="cic96t86z00028lz2t8li4lfk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iot-1-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/07/18/iot-1-4/uncategorized/cic96t87e00048lz2j7k4j9t6/" class="article-date">
+  <time datetime="2015-07-18T14:48:31.000Z" itemprop="datePublished">2015-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/07/18/iot-1-4/uncategorized/cic96t87e00048lz2j7k4j9t6/">iot-1-4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/18/iot-1-4/uncategorized/cic96t87e00048lz2j7k4j9t6/" data-id="cic96t87e00048lz2j7k4j9t6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/aa/">aa</a></li></ul>
 
     </footer>
   </div>
@@ -101,10 +207,10 @@
 
 
   
-    <article id="post-20150719-python-control-beginner" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-iot-1-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9wgi6b0006lhz2aspvsuqt/" class="article-date">
-  <time datetime="2015-07-18T18:07:38.000Z" itemprop="datePublished">2015-07-19</time>
+    <a href="/horitait/2015/07/18/iot-1-3/uncategorized/cic96t86a00008lz24uwxdheu/" class="article-date">
+  <time datetime="2015-07-18T14:47:23.000Z" itemprop="datePublished">2015-07-18</time>
 </a>
     
   </div>
@@ -115,7 +221,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9wgi6b0006lhz2aspvsuqt/">python入門①</a>
+      <a class="article-title" href="/horitait/2015/07/18/iot-1-3/uncategorized/cic96t86a00008lz24uwxdheu/">iot-1-3</a>
     </h1>
   
 
@@ -123,151 +229,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h1 id="主要なライブラリのインストール">主要なライブラリのインストール</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo easy_install pip</span><br><span class="line">pip install sympy </span><br><span class="line">pip install pylab </span><br><span class="line">pip install numpy</span><br></pre></td></tr></table></figure>
-<h1 id="簡単なプログラムの実装①">簡単なプログラムの実装①</h1><h2 id="行列演算">行列演算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#行列演算の為のライブラリの読み込み</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">m = np.matrix([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">4</span>,<span class="number">6</span>]])</span><br><span class="line"><span class="keyword">print</span> m</span><br><span class="line"><span class="keyword">print</span> m - m</span><br><span class="line"><span class="keyword">print</span> m + m </span><br><span class="line"><span class="keyword">print</span> m * m</span><br></pre></td></tr></table></figure>
-<h2 id="グラフの描画">グラフの描画</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> plt</span><br><span class="line"> </span><br><span class="line"><span class="comment">#“linspace(開始値，終了値，分割数)”で，線形数列を作成。</span></span><br><span class="line">x = linspace(-pi, pi, <span class="number">100</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#数列をsinの引数に入れると，sin(x)の数列が生成される。</span></span><br><span class="line">y = sin(x)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#とりあえずplot。</span></span><br><span class="line">plt.plot(x,y)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#plotした関数を表示する。</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h2 id="ファイルの書き込み">ファイルの書き込み</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*- </span></span><br><span class="line">f = open(<span class="string">"sample.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line">f.write(<span class="string">"Pythonでファイルに書き込みました！"</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-<h2 id="ファイルの読み込み">ファイルの読み込み</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*- </span></span><br><span class="line">f = open(<span class="string">"write.txt"</span>,<span class="string">"r"</span>)</span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> f:</span><br><span class="line">   <span class="keyword">print</span> row</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9wgi6b0006lhz2aspvsuqt/" data-id="cic9wgi6b0006lhz2aspvsuqt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-20150719-git-beginner" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9wgi6k0009lhz2g07a75es/" class="article-date">
-  <time datetime="2015-07-18T17:33:50.000Z" itemprop="datePublished">2015-07-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9wgi6k0009lhz2g07a75es/">git 入門①</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="基本操作">基本操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#レポジトリ作成</span></span><br><span class="line">git init </span><br><span class="line"></span><br><span class="line"><span class="comment">#ステージングエリアにあげる</span></span><br><span class="line">git add ファイル名</span><br><span class="line"></span><br><span class="line"><span class="comment">#コミット</span></span><br><span class="line">git commit -m コミット名</span><br><span class="line"></span><br><span class="line"><span class="comment">#１つ前のコミットと統合</span></span><br><span class="line">git commit --amend -m コミット名</span><br><span class="line"></span><br><span class="line"><span class="comment">#ログの確認</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ログの確認（簡略化）</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#現在の状態</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment">#次のコミットで反映される場所の確認</span></span><br><span class="line">git diff --cached</span><br><span class="line"></span><br><span class="line"><span class="comment">#変更箇所の確認</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#git addの取り消し</span></span><br><span class="line">git reset HEAD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#直前のコミットに戻る</span></span><br><span class="line">git reset --hard HEAD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ブランチ作成</span></span><br><span class="line">git branch ブランチ名</span><br><span class="line"></span><br><span class="line"><span class="comment">#ブランチ一覧表示</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment">#ブランチの削除</span></span><br><span class="line">git branch <span class="operator">-d</span> ブランチ名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#他のブランチを現在のブランチに取り込む</span></span><br><span class="line">git merge ブランチ名</span><br></pre></td></tr></table></figure>
-<h2 id="githubの使い方">githubの使い方</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#githubで新規レポジトリの作成を行う</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin 自分のレポジトリ</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9wgi6k0009lhz2g07a75es/" data-id="cic9wgi6k0009lhz2g07a75es" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/18/iot-1-3/uncategorized/cic96t86a00008lz24uwxdheu/" data-id="cic96t86a00008lz24uwxdheu" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-20150719-github-initial" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9wgi6i0007lhz2v3whap01/" class="article-date">
-  <time datetime="2015-07-18T17:08:34.000Z" itemprop="datePublished">2015-07-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9wgi6i0007lhz2v3whap01/">githubの初期設定①</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h4 id="githubに登録する公開鍵の作成">githubに登録する公開鍵の作成</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span> <span class="operator">-f</span> ~/.ssh/id_rsa_github</span><br><span class="line">pbcopy &lt; ~/.ssh/id_rsa_github.pub</span><br></pre></td></tr></table></figure>
-<p>次に、githubのアカウント設定ページへ行き公開鍵を貼付ける。</p>
-<h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>Hi username! You’ve successfully authen が表示されれば成功</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9wgi6i0007lhz2v3whap01/" data-id="cic9wgi6i0007lhz2v3whap01" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-20150719-web-term" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9wgi5v0003lhz2iborbzj6/" class="article-date">
-  <time datetime="2015-07-18T17:08:17.000Z" itemprop="datePublished">2015-07-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9wgi5v0003lhz2iborbzj6/">簡易sshトンネルの作成方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h4 id="webターミナルエミュレータwettyの設定">webターミナルエミュレータwettyの設定</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/krishnasrinivas/wetty.git</span><br><span class="line"><span class="built_in">cd</span> wetty</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment">#basic 認証</span></span><br><span class="line">npm install basic-auth-connect</span><br><span class="line"></span><br><span class="line"><span class="comment">##############################################################</span></span><br><span class="line"><span class="comment">#wetty/app.jsに以下を追加</span></span><br><span class="line"><span class="comment">#var basicAuth = require('basic-auth-connect');</span></span><br><span class="line"><span class="comment">#app.use(basicAuth('username', 'password')); [パスワード設定]</span></span><br><span class="line"><span class="comment">##############################################################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#起動</span></span><br><span class="line">node app.js -p <span class="number">4400</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#起動（自前認証局を使う場合）</span></span><br><span class="line"><span class="comment">#openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 30000 -nodes</span></span><br><span class="line"><span class="comment">#node app.js --sslkey key.pem --sslcert cert.pem -p 4400</span></span><br></pre></td></tr></table></figure>
-<h4 id="ngrokの設定(httpsトンネル用)">ngrokの設定(httpsトンネル用)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.ngrok.com/ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line">unzip ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#ポート4400の外部解放</span></span><br><span class="line">./ngrok http -bind-tls=<span class="literal">true</span> <span class="number">4400</span></span><br></pre></td></tr></table></figure>
-<h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open <span class="operator">-a</span> <span class="string">"Google Chrome"</span> $ターミナルに表示されたURL</span><br></pre></td></tr></table></figure>
-<p><br></p>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9wgi5v0003lhz2iborbzj6/webterm.gif" alt="完成図" title="完成図">
-<h4 id="（TIPS）_ターミナルマルチプレクサを用いたペアワークの行い方">（TIPS） ターミナルマルチプレクサを用いたペアワークの行い方</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ローカルPCで次のコマンドを打つ（コマンドがない場合は brew install tmux）</span></span><br><span class="line">tmux</span><br><span class="line"></span><br><span class="line"><span class="comment">#webターミナルエミュレータwetty上で次のコマンドを打つ</span></span><br><span class="line">tmux　attach -t ローカルPCのtmux端末左下の数字</span><br></pre></td></tr></table></figure>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9wgi5v0003lhz2iborbzj6/web-term2.gif" alt="ターミナル多重化動作図" title="ターミナル多重化動作図">
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cic9wgi5v0003lhz2iborbzj6/" data-id="cic9wgi5v0003lhz2iborbzj6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
-
     </footer>
   </div>
   
@@ -286,7 +254,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/aa/">aa</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -309,23 +277,23 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cic9wgi5l0000lhz2h6f8hqwv/">シェルスクリプト基礎①</a>
+            <a href="/horitait/2015/07/18/iot-1-6/uncategorized/cic96t86w00018lz21q3km0ae/">iot-1-6</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cic9wgi6b0006lhz2aspvsuqt/">python入門①</a>
+            <a href="/horitait/2015/07/18/iot-1-5-1/uncategorized/cic96t87c00038lz2l60w8f5r/">iot-1-5</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cic9wgi6k0009lhz2g07a75es/">git 入門①</a>
+            <a href="/horitait/2015/07/18/iot-1-5/uncategorized/cic96t86z00028lz2t8li4lfk/">iot-1-5</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cic9wgi6i0007lhz2v3whap01/">githubの初期設定①</a>
+            <a href="/horitait/2015/07/18/iot-1-4/uncategorized/cic96t87e00048lz2j7k4j9t6/">iot-1-4</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cic9wgi5v0003lhz2iborbzj6/">簡易sshトンネルの作成方法</a>
+            <a href="/horitait/2015/07/18/iot-1-3/uncategorized/cic96t86a00008lz24uwxdheu/">iot-1-3</a>
           </li>
         
       </ul>
@@ -341,10 +309,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2015 atyenoria<br>
-        Mail: eigotyoubunn30@gmail.com
-        <br><a href="https://github.com/atyenoria" target="_blank">
-        Github Account</a></br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo with atyenoria theme</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
