@@ -61,9 +61,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/07/26/python2/uncategorized/cicjmre4800030o1acqskq9wp/" class="article-date">
+  <time datetime="2015-07-25T22:29:14.000Z" itemprop="datePublished">2015-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/07/26/python2/uncategorized/cicjmre4800030o1acqskq9wp/">単純ベイズ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">NaiveBayes1 class</span><br><span class="line"></span><br><span class="line">Chapter "Naive Bayes: a Primary Course"</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># imports</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># public symbols</span></span><br><span class="line">__all__ = [<span class="string">'NaiveBayes1'</span>]</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NaiveBayes1</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span><br><span class="line">    Naive Bayes class (1)</span><br><span class="line"></span><br><span class="line">    Attributes</span><br><span class="line">    ----------</span><br><span class="line">    `pY_` : array_like, shape=(n_classes), dtype=float</span><br><span class="line">        pmf of a class</span><br><span class="line">    `pXgY_` : array_like, shape(n_features, n_classes, n_fvalues), dtype=float</span><br><span class="line">        pmf of feature values given a class</span><br><span class="line">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.pY_ = <span class="keyword">None</span></span><br><span class="line">        self.pXgY_ = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y)</span>:</span></span><br><span class="line">        <span class="string">"""</span><br><span class="line">        Fitting model</span><br><span class="line"></span><br><span class="line">        Parameters</span><br><span class="line">        ----------</span><br><span class="line">        X : array_like, shape=(n_samples, n_features), dtype=int</span><br><span class="line">            feature values of training samples</span><br><span class="line">        y : array_like, shape=(n_samples), dtype=int</span><br><span class="line">            class labels of training samples</span><br><span class="line">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># constants</span></span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">        n_features = X.shape[<span class="number">1</span>]</span><br><span class="line">        n_classes = <span class="number">2</span></span><br><span class="line">        n_fvalues = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># check the size of y</span></span><br><span class="line">        <span class="keyword">if</span> n_samples != len(y):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Mismatched number of samples.'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># count up n[yi=y]</span></span><br><span class="line">        nY = np.zeros(n_classes, dtype=np.int)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n_samples):</span><br><span class="line">            nY[y[i]] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># calc pY_</span></span><br><span class="line">        self.pY_ = np.empty(n_classes, dtype=np.float)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n_classes):</span><br><span class="line">            self.pY_[i] = nY[i] / np.float(n_samples)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># count up n[x_ij=xj, yi=y]</span></span><br><span class="line">        nXY = np.zeros((n_features, n_fvalues, n_classes), dtype=np.int)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n_samples):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> xrange(n_features):</span><br><span class="line">                nXY[j, X[i, j], y[i]] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># calc pXgY_</span></span><br><span class="line">        self.pXgY_ = np.empty((n_features, n_fvalues, n_classes),</span><br><span class="line">                              dtype=np.float)</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> xrange(n_features):</span><br><span class="line">            <span class="keyword">for</span> xi <span class="keyword">in</span> xrange(n_fvalues):</span><br><span class="line">                <span class="keyword">for</span> yi <span class="keyword">in</span> xrange(n_classes):</span><br><span class="line">                    self.pXgY_[j, xi, yi] = nXY[j, xi, yi] / np.float(nY[yi])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">        <span class="string">"""</span><br><span class="line">        Predict class</span><br><span class="line"></span><br><span class="line">        Parameters</span><br><span class="line">        ----------</span><br><span class="line">        X : array_like, shape=(n_samples, n_features), dtype=int</span><br><span class="line">            feature values of unseen samples</span><br><span class="line"></span><br><span class="line">        Returns</span><br><span class="line">        -------</span><br><span class="line">        y : array_like, shape=(n_samples), dtype=int</span><br><span class="line">            predicted class labels</span><br><span class="line">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># constants</span></span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">        n_features = X.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># memory for return values</span></span><br><span class="line">        y = np.empty(n_samples, dtype=np.int)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># for each feature in X</span></span><br><span class="line">        <span class="keyword">for</span> i, xi <span class="keyword">in</span> enumerate(X):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># calc joint probability</span></span><br><span class="line">            logpXY = np.log(self.pY_) + \</span><br><span class="line">                     np.sum(np.log(self.pXgY_[np.arange(n_features), xi, :]),</span><br><span class="line">                            axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># predict class</span></span><br><span class="line">            y[i] = np.argmax(logpXY)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python2/uncategorized/cicjmre4800030o1acqskq9wp/" data-id="cicjmre4800030o1acqskq9wp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/python1/uncategorized/cicjlb4xw0003ug1ar3akal0k/" class="article-date">
+    <a href="/horitait/2015/07/26/python1/uncategorized/cicjmre4c00060o1ah3xkgvep/" class="article-date">
   <time datetime="2015-07-25T21:37:02.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -75,7 +113,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/26/python1/uncategorized/cicjlb4xw0003ug1ar3akal0k/">python入門②</a>
+      <a class="article-title" href="/horitait/2015/07/26/python1/uncategorized/cicjmre4c00060o1ah3xkgvep/">python入門②</a>
     </h1>
   
 
@@ -85,14 +123,14 @@
       
         <hr>
 <h3 id="高速フーリエ変換の例">高速フーリエ変換の例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> arange, hamming, sin, pi</span><br><span class="line"><span class="keyword">from</span> scipy.fftpack <span class="keyword">import</span> fft, ifft</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> pl</span><br><span class="line"></span><br><span class="line"><span class="comment">#set frequency and length</span></span><br><span class="line">fs = <span class="number">8000</span></span><br><span class="line">L = <span class="number">1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#create sinusoidal wave</span></span><br><span class="line">sine_440 = sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">440.</span> / fs)</span><br><span class="line">sine_600 = <span class="number">2</span> * sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">600.</span> / fs)</span><br><span class="line">sine_800 = <span class="number">3</span> * sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">800.</span> / fs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#add created sinusoidal waves</span></span><br><span class="line">sig = sine_440 + sine_600 + sine_800</span><br><span class="line"></span><br><span class="line"><span class="comment">#create window</span></span><br><span class="line">win = hamming(L)</span><br><span class="line"></span><br><span class="line"><span class="comment">#fft with no window</span></span><br><span class="line">spectrum_nw = fft(sig)</span><br><span class="line"></span><br><span class="line"><span class="comment">#fft with  window</span></span><br><span class="line">spectrum = fft(sig * win)</span><br><span class="line"></span><br><span class="line"><span class="comment">#spectrum with no window</span></span><br><span class="line">half_spectrum_nw = abs(spectrum_nw[: L / <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#spectrum with  window</span></span><br><span class="line">half_spectrum = abs(spectrum[: L / <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#inverse fft</span></span><br><span class="line">resyn_sig = ifft(spectrum)</span><br><span class="line">resyn_sig /= win</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#plot setting</span></span><br><span class="line">fig = pl.figure()</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 1</span></span><br><span class="line">fig.add_subplot(<span class="number">411</span>)</span><br><span class="line">pl.plot(sig)</span><br><span class="line">pl.xlim([<span class="number">0</span>, L])</span><br><span class="line">pl.title(<span class="string">"1. Input signal"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 2</span></span><br><span class="line">fig.add_subplot(<span class="number">412</span>)</span><br><span class="line">pl.plot(half_spectrum_nw)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(half_spectrum_nw)])</span><br><span class="line">pl.title(<span class="string">"2. Spectrum (no window)"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 3</span></span><br><span class="line">fig.add_subplot(<span class="number">413</span>)</span><br><span class="line">pl.plot(half_spectrum)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(half_spectrum)])</span><br><span class="line">pl.title(<span class="string">"3. Spectrum (with window)"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 4</span></span><br><span class="line">fig.add_subplot(<span class="number">414</span>)</span><br><span class="line">pl.plot(resyn_sig)</span><br><span class="line">pl.xlim([<span class="number">0</span>, L])</span><br><span class="line">pl.title(<span class="string">"4. Resynthesized signal"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
-<h3 id="株価を用いた時系列解析のための基礎">株価を用いた時系列解析のための基礎</h3><img src="/horitait/2015/07/26/python1/uncategorized/cicjlb4xw0003ug1ar3akal0k/graph1.png" alt="ステップ1" title="ステップ1">
-<img src="/horitait/2015/07/26/python1/uncategorized/cicjlb4xw0003ug1ar3akal0k/graph2.png" alt="ステップ2" title="ステップ2">
+<h3 id="株価を用いた時系列解析のための基礎">株価を用いた時系列解析のための基礎</h3><img src="/horitait/2015/07/26/python1/uncategorized/cicjmre4c00060o1ah3xkgvep/graph1.png" alt="ステップ1" title="ステップ1">
+<img src="/horitait/2015/07/26/python1/uncategorized/cicjmre4c00060o1ah3xkgvep/graph2.png" alt="ステップ2" title="ステップ2">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> pandas.io.data <span class="keyword">as</span> web</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> pl</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> norm</span><br><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#use Apple Inc., Dell Inc.</span></span><br><span class="line">names = [<span class="string">'AAPL'</span>,<span class="string">'DELL'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#scrape stock price</span></span><br><span class="line">price = web.get_data_yahoo(names[<span class="number">0</span>], <span class="string">'2009-12-31'</span>)[<span class="string">'Adj Close'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#add noise to price</span></span><br><span class="line">price_noise1=normal(<span class="number">0</span>,<span class="number">3</span>,len(price)) + price</span><br><span class="line"></span><br><span class="line">returns = price.pct_change(periods=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#calculate moving average</span></span><br><span class="line">price_moving_average = pd.rolling_mean(price,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#calculate return index</span></span><br><span class="line">ret_index = (<span class="number">1</span> + returns).cumprod()</span><br><span class="line">ret_index[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### show data in cosole</span></span><br><span class="line"><span class="comment"># print price</span></span><br><span class="line"><span class="comment"># print price_noise1</span></span><br><span class="line"><span class="comment"># print returns</span></span><br><span class="line"><span class="comment"># print ret_index</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### plot data</span></span><br><span class="line">pl.plot(price)</span><br><span class="line">pl.plot(price_noise1)</span><br><span class="line">pl.plot(returns)</span><br><span class="line">pl.plot(ret_index)</span><br><span class="line">pl.plot(price_moving_average)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(price)])</span><br><span class="line">pl.title(<span class="string">"Transition of the stock price"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line">pl.xlabel(<span class="string">"Time (day)"</span>)</span><br><span class="line">pl.ylabel(<span class="string">"Price ($)"</span>)</span><br><span class="line">pl.savefig(<span class="string">"graph1.png"</span>)</span><br><span class="line">pl.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###histogram</span></span><br><span class="line">pl.hist(price, bins=<span class="number">100</span>)</span><br><span class="line">pl.xlabel(<span class="string">"Frequency(bin=100)"</span>)</span><br><span class="line">pl.ylabel(<span class="string">"Price ($)"</span>)</span><br><span class="line">pl.savefig(<span class="string">"graph2.png"</span>)</span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/cicjlb4xw0003ug1ar3akal0k/" data-id="cicjlb4xw0003ug1ar3akal0k" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/cicjmre4c00060o1ah3xkgvep/" data-id="cicjmre4c00060o1ah3xkgvep" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -106,7 +144,7 @@
   
     <article id="post-2015-07-19-shell-beginnner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjlb4xj0000ug1a87y6v1cm/" class="article-date">
+    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjmre3v00000o1aitivle4g/" class="article-date">
   <time datetime="2015-07-19T02:21:50.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -118,7 +156,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjlb4xj0000ug1a87y6v1cm/">シェルスクリプト基礎①</a>
+      <a class="article-title" href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjmre3v00000o1aitivle4g/">シェルスクリプト基礎①</a>
     </h1>
   
 
@@ -132,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjlb4xj0000ug1a87y6v1cm/" data-id="cicjlb4xj0000ug1a87y6v1cm" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjmre3v00000o1aitivle4g/" data-id="cicjmre3v00000o1aitivle4g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -146,7 +184,7 @@
   
     <article id="post-20150719-python-control-beginner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjlb4yd0008ug1abmibyu52/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjmre4t000b0o1a5jagt5t7/" class="article-date">
   <time datetime="2015-07-18T18:07:38.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -158,7 +196,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjlb4yd0008ug1abmibyu52/">python入門①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjmre4t000b0o1a5jagt5t7/">python入門①</a>
     </h1>
   
 
@@ -176,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjlb4yd0008ug1abmibyu52/" data-id="cicjlb4yd0008ug1abmibyu52" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjmre4t000b0o1a5jagt5t7/" data-id="cicjmre4t000b0o1a5jagt5t7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -190,7 +228,7 @@
   
     <article id="post-20150719-git-beginner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjlb4yi000cug1aucsrwxva/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjmre4w000f0o1apfgzrky6/" class="article-date">
   <time datetime="2015-07-18T17:33:50.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -202,7 +240,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjlb4yi000cug1aucsrwxva/">git 入門①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjmre4w000f0o1apfgzrky6/">git 入門①</a>
     </h1>
   
 
@@ -217,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjlb4yi000cug1aucsrwxva/" data-id="cicjlb4yi000cug1aucsrwxva" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjmre4w000f0o1apfgzrky6/" data-id="cicjmre4w000f0o1apfgzrky6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -231,7 +269,7 @@
   
     <article id="post-20150719-github-initial" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjlb4yf000aug1a07kp15gg/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjmre4u000d0o1a6lw35e08/" class="article-date">
   <time datetime="2015-07-18T17:08:34.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -243,7 +281,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjlb4yf000aug1a07kp15gg/">githubの初期設定①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjmre4u000d0o1a6lw35e08/">githubの初期設定①</a>
     </h1>
   
 
@@ -260,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjlb4yf000aug1a07kp15gg/" data-id="cicjlb4yf000aug1a07kp15gg" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjmre4u000d0o1a6lw35e08/" data-id="cicjmre4u000d0o1a6lw35e08" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
@@ -274,7 +312,7 @@
   
     <article id="post-20150719-web-term" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjlb4y40005ug1a52z0r2t9/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjmre4i00080o1ai038nsuz/" class="article-date">
   <time datetime="2015-07-18T17:08:17.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -286,7 +324,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjlb4y40005ug1a52z0r2t9/">簡易sshトンネルの作成方法</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjmre4i00080o1ai038nsuz/">簡易sshトンネルの作成方法</a>
     </h1>
   
 
@@ -299,15 +337,15 @@
 <h4 id="ngrokの設定(httpsトンネル用)">ngrokの設定(httpsトンネル用)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.ngrok.com/ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line">unzip ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#ポート4400の外部解放</span></span><br><span class="line">./ngrok http -bind-tls=<span class="literal">true</span> <span class="number">4400</span></span><br></pre></td></tr></table></figure>
 <h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open <span class="operator">-a</span> <span class="string">"Google Chrome"</span> $ターミナルに表示されたURL</span><br></pre></td></tr></table></figure>
 <p><br></p>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjlb4y40005ug1a52z0r2t9/webterm.gif" alt="完成図" title="完成図">
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjmre4i00080o1ai038nsuz/webterm.gif" alt="完成図" title="完成図">
 <h4 id="Web_ターミナルからmacにログインできない場合">Web ターミナルからmacにログインできない場合</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#/etc/sshd_config</span><br><span class="line">２つ方法あり</span><br><span class="line">①<span class="id">#PasswordAuthentication</span> no → <span class="id">#PasswordAuthentication</span> yes</span><br><span class="line">②もしくは公開鍵認証の設定を行う</span><br></pre></td></tr></table></figure>
 <h4 id="（TIPS）_ターミナルマルチプレクサを用いたペアワークの行い方">（TIPS） ターミナルマルチプレクサを用いたペアワークの行い方</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ローカルPCで次のコマンドを打つ（コマンドがない場合は brew install tmux）</span></span><br><span class="line">tmux</span><br><span class="line"></span><br><span class="line"><span class="comment">#webターミナルエミュレータwetty上で次のコマンドを打つ</span></span><br><span class="line">tmux　attach -t ローカルPCのtmux端末左下の数字</span><br></pre></td></tr></table></figure>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjlb4y40005ug1a52z0r2t9/web-term2.gif" alt="ターミナル多重化動作図" title="ターミナル多重化動作図">
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicjmre4i00080o1ai038nsuz/web-term2.gif" alt="ターミナル多重化動作図" title="ターミナル多重化動作図">
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicjlb4y40005ug1a52z0r2t9/" data-id="cicjlb4y40005ug1a52z0r2t9" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicjmre4i00080o1ai038nsuz/" data-id="cicjmre4i00080o1ai038nsuz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
@@ -330,7 +368,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -341,7 +379,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -353,23 +391,23 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/07/26/python1/uncategorized/cicjlb4xw0003ug1ar3akal0k/">python入門②</a>
+            <a href="/horitait/2015/07/26/python2/uncategorized/cicjmre4800030o1acqskq9wp/">単純ベイズ</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjlb4xj0000ug1a87y6v1cm/">シェルスクリプト基礎①</a>
+            <a href="/horitait/2015/07/26/python1/uncategorized/cicjmre4c00060o1ah3xkgvep/">python入門②</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjlb4yd0008ug1abmibyu52/">python入門①</a>
+            <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicjmre3v00000o1aitivle4g/">シェルスクリプト基礎①</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjlb4yi000cug1aucsrwxva/">git 入門①</a>
+            <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicjmre4t000b0o1a5jagt5t7/">python入門①</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicjlb4yf000aug1a07kp15gg/">githubの初期設定①</a>
+            <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicjmre4w000f0o1apfgzrky6/">git 入門①</a>
           </li>
         
       </ul>
