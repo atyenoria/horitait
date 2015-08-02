@@ -8,11 +8,11 @@
   <meta name="description" content="webターミナルエミュレータwettyの設定1234567891011121314151617181920git clone https://github.com/krishnasrinivas/wetty.gitcd wettynpm install#basic 認証npm install basic-auth-connect###################################">
 <meta property="og:type" content="article">
 <meta property="og:title" content="簡易sshトンネルの作成方法">
-<meta property="og:url" content="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/index.html">
+<meta property="og:url" content="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/index.html">
 <meta property="og:site_name" content="堀田IT教室">
 <meta property="og:description" content="webターミナルエミュレータwettyの設定1234567891011121314151617181920git clone https://github.com/krishnasrinivas/wetty.gitcd wettynpm install#basic 認証npm install basic-auth-connect###################################">
-<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/webterm.gif">
-<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/web-term2.gif">
+<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/webterm.gif">
+<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/web-term2.gif">
 <meta property="og:updated_time" content="2015-07-27T18:35:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="簡易sshトンネルの作成方法">
@@ -64,7 +64,7 @@
       <div class="outer">
         <section id="main"><article id="post-20150719-web-term" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/" class="article-date">
   <time datetime="2015-07-18T17:08:17.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -89,15 +89,15 @@
 <h4 id="ngrokの設定(httpsトンネル用)">ngrokの設定(httpsトンネル用)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.ngrok.com/ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line">unzip ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#ポート4400の外部解放</span></span><br><span class="line">./ngrok -subdomain=horitait http -bind-tls=<span class="literal">true</span> <span class="number">4400</span></span><br></pre></td></tr></table></figure>
 <h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open <span class="operator">-a</span> <span class="string">"Google Chrome"</span> $ターミナルに表示されたURL</span><br></pre></td></tr></table></figure>
 <p><br></p>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/webterm.gif" alt="完成図" title="完成図">
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/webterm.gif" alt="完成図" title="完成図">
 <h4 id="Web_ターミナルからmacにログインできない場合">Web ターミナルからmacにログインできない場合</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#/etc/sshd_config</span><br><span class="line">２つ方法あり</span><br><span class="line">①<span class="id">#PasswordAuthentication</span> no → <span class="id">#PasswordAuthentication</span> yes</span><br><span class="line">②もしくは公開鍵認証の設定を行う</span><br></pre></td></tr></table></figure>
 <h4 id="（TIPS）_ターミナルマルチプレクサを用いたペアワークの行い方">（TIPS） ターミナルマルチプレクサを用いたペアワークの行い方</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ローカルPCで次のコマンドを打つ（コマンドがない場合は brew install tmux）</span></span><br><span class="line">tmux</span><br><span class="line"></span><br><span class="line"><span class="comment">#webターミナルエミュレータwetty上で次のコマンドを打つ</span></span><br><span class="line">tmux　attach -t ローカルPCのtmux端末左下の数字</span><br></pre></td></tr></table></figure>
-<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/web-term2.gif" alt="ターミナル多重化動作図" title="ターミナル多重化動作図">
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/web-term2.gif" alt="ターミナル多重化動作図" title="ターミナル多重化動作図">
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicka4gnw000ed91a5kktx4qo/" data-id="cicka4gnw000ed91a5kktx4qo" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/" data-id="cicuayxx5000i0p1aea6qsq34" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
@@ -108,7 +108,7 @@
     
 <nav id="article-nav">
   
-    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicka4go5000jd91ayd5jcwst/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicuayxxg000n0p1azdh7nt2t/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -133,7 +133,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">6</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -144,7 +144,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -156,23 +156,23 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/07/26/control0/uncategorized/cicka4gnm000ad91ak2rwqfvs/">python入門⓪</a>
+            <a href="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/">PID制御</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/circuit1/uncategorized/cicka4gnp000cd91a51k0u6ch/">①電子回路入門</a>
+            <a href="/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/">１次遅れ系のステップ応答</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/control1/uncategorized/cicka4gni0008d91a3snxr47d/">連続時間制御入門</a>
+            <a href="/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/">python入門⓪</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/python2/uncategorized/cicka4gn70003d91atwucxeo4/">単純ベイズ</a>
+            <a href="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/">①電子回路入門</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/python1/uncategorized/cicka4gna0006d91ax9eiub5z/">python入門②</a>
+            <a href="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/">連続時間制御入門</a>
           </li>
         
       </ul>

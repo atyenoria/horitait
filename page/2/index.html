@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>堀田IT教室</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="堀田IT教室">
+<meta property="og:url" content="http://atyenoria.github.io/horitait/page/2/index.html">
+<meta property="og:site_name" content="堀田IT教室">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="堀田IT教室">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="堀田IT教室" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/horitait/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">堀田IT教室</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://atyenoria.github.io/horitait"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-20150719-github-initial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicuayxxg000n0p1azdh7nt2t/" class="article-date">
+  <time datetime="2015-07-18T17:08:34.000Z" itemprop="datePublished">2015-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/07/19/20150719-github-initial/uncategorized/cicuayxxg000n0p1azdh7nt2t/">githubの初期設定①</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h4 id="githubに登録する公開鍵の作成">githubに登録する公開鍵の作成</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span> <span class="operator">-f</span> ~/.ssh/id_rsa_github</span><br><span class="line">pbcopy &lt; ~/.ssh/id_rsa_github.pub</span><br></pre></td></tr></table></figure>
+<p>次に、githubのアカウント設定ページへ行き公開鍵を貼付ける。</p>
+<h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>Hi username! You’ve successfully authen が表示されれば成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-github-initial/uncategorized/cicuayxxg000n0p1azdh7nt2t/" data-id="cicuayxxg000n0p1azdh7nt2t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-20150719-web-term" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/" class="article-date">
+  <time datetime="2015-07-18T17:08:17.000Z" itemprop="datePublished">2015-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/">簡易sshトンネルの作成方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h4 id="webターミナルエミュレータwettyの設定">webターミナルエミュレータwettyの設定</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/krishnasrinivas/wetty.git</span><br><span class="line"><span class="built_in">cd</span> wetty</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment">#basic 認証</span></span><br><span class="line">npm install basic-auth-connect</span><br><span class="line"></span><br><span class="line"><span class="comment">##############################################################</span></span><br><span class="line"><span class="comment">#wetty/app.jsに以下を追加</span></span><br><span class="line"><span class="comment">#var basicAuth = require('basic-auth-connect');</span></span><br><span class="line"><span class="comment">#app.use(basicAuth('username', 'password')); [パスワード設定]</span></span><br><span class="line"><span class="comment">##############################################################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#起動</span></span><br><span class="line">node app.js -p <span class="number">4400</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#起動（自前認証局を使う場合）</span></span><br><span class="line"><span class="comment">#openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 30000 -nodes</span></span><br><span class="line"><span class="comment">#node app.js --sslkey key.pem --sslcert cert.pem -p 4400</span></span><br></pre></td></tr></table></figure>
+<h4 id="ngrokの設定(httpsトンネル用)">ngrokの設定(httpsトンネル用)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.ngrok.com/ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line">unzip ngrok_2.<span class="number">0.19</span>_darwin_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#ポート4400の外部解放</span></span><br><span class="line">./ngrok -subdomain=horitait http -bind-tls=<span class="literal">true</span> <span class="number">4400</span></span><br></pre></td></tr></table></figure>
+<h4 id="確認作業">確認作業</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open <span class="operator">-a</span> <span class="string">"Google Chrome"</span> $ターミナルに表示されたURL</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/webterm.gif" alt="完成図" title="完成図">
+<h4 id="Web_ターミナルからmacにログインできない場合">Web ターミナルからmacにログインできない場合</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#/etc/sshd_config</span><br><span class="line">２つ方法あり</span><br><span class="line">①<span class="id">#PasswordAuthentication</span> no → <span class="id">#PasswordAuthentication</span> yes</span><br><span class="line">②もしくは公開鍵認証の設定を行う</span><br></pre></td></tr></table></figure>
+<h4 id="（TIPS）_ターミナルマルチプレクサを用いたペアワークの行い方">（TIPS） ターミナルマルチプレクサを用いたペアワークの行い方</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ローカルPCで次のコマンドを打つ（コマンドがない場合は brew install tmux）</span></span><br><span class="line">tmux</span><br><span class="line"></span><br><span class="line"><span class="comment">#webターミナルエミュレータwetty上で次のコマンドを打つ</span></span><br><span class="line">tmux　attach -t ローカルPCのtmux端末左下の数字</span><br></pre></td></tr></table></figure>
+<img src="/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/web-term2.gif" alt="ターミナル多重化動作図" title="ターミナル多重化動作図">
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-web-term/uncategorized/cicuayxx5000i0p1aea6qsq34/" data-id="cicuayxx5000i0p1aea6qsq34" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/">PID制御</a>
+          </li>
+        
+          <li>
+            <a href="/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/">１次遅れ系のステップ応答</a>
+          </li>
+        
+          <li>
+            <a href="/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/">python入門⓪</a>
+          </li>
+        
+          <li>
+            <a href="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/">①電子回路入門</a>
+          </li>
+        
+          <li>
+            <a href="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/">連続時間制御入門</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atyenoria<br>
+        Mail: eigotyoubunn30@gmail.com
+        <br><a href="https://github.com/atyenoria" target="_blank">
+        Github Account</a></br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo with atyenoria theme</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/horitait/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/horitait/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/horitait/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
