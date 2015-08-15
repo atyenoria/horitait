@@ -8,11 +8,11 @@
   <meta name="description" content="高速フーリエ変換の例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768#!/usr/bin/env python# -*- coding: utf-8 -*-from scipy import a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python入門②">
-<meta property="og:url" content="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/index.html">
+<meta property="og:url" content="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/index.html">
 <meta property="og:site_name" content="堀田IT教室">
 <meta property="og:description" content="高速フーリエ変換の例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768#!/usr/bin/env python# -*- coding: utf-8 -*-from scipy import a">
-<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/graph1.png">
-<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/graph2.png">
+<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/graph1.png">
+<meta property="og:image" content="http://atyenoria.github.io/horitait/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/graph2.png">
 <meta property="og:updated_time" content="2015-07-26T09:53:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python入門②">
@@ -64,7 +64,7 @@
       <div class="outer">
         <section id="main"><article id="post-python1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/" class="article-date">
+    <a href="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/" class="article-date">
   <time datetime="2015-07-25T21:37:02.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -86,14 +86,14 @@
       
         <hr>
 <h3 id="高速フーリエ変換の例">高速フーリエ変換の例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> arange, hamming, sin, pi</span><br><span class="line"><span class="keyword">from</span> scipy.fftpack <span class="keyword">import</span> fft, ifft</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> pl</span><br><span class="line"></span><br><span class="line"><span class="comment">#set frequency and length</span></span><br><span class="line">fs = <span class="number">8000</span></span><br><span class="line">L = <span class="number">1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#create sinusoidal wave</span></span><br><span class="line">sine_440 = sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">440.</span> / fs)</span><br><span class="line">sine_600 = <span class="number">2</span> * sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">600.</span> / fs)</span><br><span class="line">sine_800 = <span class="number">3</span> * sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">800.</span> / fs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#add created sinusoidal waves</span></span><br><span class="line">sig = sine_440 + sine_600 + sine_800</span><br><span class="line"></span><br><span class="line"><span class="comment">#create window</span></span><br><span class="line">win = hamming(L)</span><br><span class="line"></span><br><span class="line"><span class="comment">#fft with no window</span></span><br><span class="line">spectrum_nw = fft(sig)</span><br><span class="line"></span><br><span class="line"><span class="comment">#fft with  window</span></span><br><span class="line">spectrum = fft(sig * win)</span><br><span class="line"></span><br><span class="line"><span class="comment">#spectrum with no window</span></span><br><span class="line">half_spectrum_nw = abs(spectrum_nw[: L / <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#spectrum with  window</span></span><br><span class="line">half_spectrum = abs(spectrum[: L / <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#inverse fft</span></span><br><span class="line">resyn_sig = ifft(spectrum)</span><br><span class="line">resyn_sig /= win</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#plot setting</span></span><br><span class="line">fig = pl.figure()</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 1</span></span><br><span class="line">fig.add_subplot(<span class="number">411</span>)</span><br><span class="line">pl.plot(sig)</span><br><span class="line">pl.xlim([<span class="number">0</span>, L])</span><br><span class="line">pl.title(<span class="string">"1. Input signal"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 2</span></span><br><span class="line">fig.add_subplot(<span class="number">412</span>)</span><br><span class="line">pl.plot(half_spectrum_nw)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(half_spectrum_nw)])</span><br><span class="line">pl.title(<span class="string">"2. Spectrum (no window)"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 3</span></span><br><span class="line">fig.add_subplot(<span class="number">413</span>)</span><br><span class="line">pl.plot(half_spectrum)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(half_spectrum)])</span><br><span class="line">pl.title(<span class="string">"3. Spectrum (with window)"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 4</span></span><br><span class="line">fig.add_subplot(<span class="number">414</span>)</span><br><span class="line">pl.plot(resyn_sig)</span><br><span class="line">pl.xlim([<span class="number">0</span>, L])</span><br><span class="line">pl.title(<span class="string">"4. Resynthesized signal"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
-<h3 id="株価を用いた時系列解析">株価を用いた時系列解析</h3><img src="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/graph1.png" alt="ステップ1" title="ステップ1">
-<img src="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/graph2.png" alt="ステップ2" title="ステップ2">
+<h3 id="株価を用いた時系列解析">株価を用いた時系列解析</h3><img src="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/graph1.png" alt="ステップ1" title="ステップ1">
+<img src="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/graph2.png" alt="ステップ2" title="ステップ2">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> pandas.io.data <span class="keyword">as</span> web</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> pl</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> norm</span><br><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#use Apple Inc., Dell Inc.</span></span><br><span class="line">names = [<span class="string">'AAPL'</span>,<span class="string">'DELL'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#scrape stock price</span></span><br><span class="line">price = web.get_data_yahoo(names[<span class="number">0</span>], <span class="string">'2009-12-31'</span>)[<span class="string">'Adj Close'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#add noise to price</span></span><br><span class="line">price_noise1=normal(<span class="number">0</span>,<span class="number">3</span>,len(price)) + price</span><br><span class="line"></span><br><span class="line">returns = price.pct_change(periods=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#calculate moving average</span></span><br><span class="line">price_moving_average = pd.rolling_mean(price,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#calculate return index</span></span><br><span class="line">ret_index = (<span class="number">1</span> + returns).cumprod()</span><br><span class="line">ret_index[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### show data in cosole</span></span><br><span class="line"><span class="comment"># print price</span></span><br><span class="line"><span class="comment"># print price_noise1</span></span><br><span class="line"><span class="comment"># print returns</span></span><br><span class="line"><span class="comment"># print ret_index</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### plot data</span></span><br><span class="line">pl.plot(price)</span><br><span class="line">pl.plot(price_noise1)</span><br><span class="line">pl.plot(returns)</span><br><span class="line">pl.plot(ret_index)</span><br><span class="line">pl.plot(price_moving_average)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(price)])</span><br><span class="line">pl.title(<span class="string">"Transition of the stock price"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line">pl.xlabel(<span class="string">"Time (day)"</span>)</span><br><span class="line">pl.ylabel(<span class="string">"Price ($)"</span>)</span><br><span class="line">pl.savefig(<span class="string">"graph1.png"</span>)</span><br><span class="line">pl.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###histogram</span></span><br><span class="line">pl.hist(price, bins=<span class="number">100</span>)</span><br><span class="line">pl.xlabel(<span class="string">"Frequency(bin=100)"</span>)</span><br><span class="line">pl.ylabel(<span class="string">"Price ($)"</span>)</span><br><span class="line">pl.savefig(<span class="string">"graph2.png"</span>)</span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/" data-id="cicuayxvy00060p1anb5guz20" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/" data-id="ciddp2p530006hu1atf7pkjej" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -104,7 +104,7 @@
     
 <nav id="article-nav">
   
-    <a href="/horitait/2015/07/26/python2/uncategorized/cicuayxvu00030p1azyh1gm34/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/horitait/2015/07/26/python2/uncategorized/ciddp2p510003hu1ab48qbnn0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -114,7 +114,7 @@
     </a>
   
   
-    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicuayxvg00000p1ary3nmozc/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/ciddp2p4n0000hu1a4e3hzic0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">シェルスクリプト基礎①</div>
     </a>
@@ -134,7 +134,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">8</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -145,7 +145,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/08/">August 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -157,23 +157,23 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/">PID制御</a>
+            <a href="/horitait/2015/08/16/kalman/uncategorized/ciddp2p5q000ahu1a0lg8d01v/">kalman filter</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/">１次遅れ系のステップ応答</a>
+            <a href="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/">PID制御</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/">python入門⓪</a>
+            <a href="/horitait/2015/08/02/contro3/uncategorized/ciddp2p5y000ghu1aq8dd3ap9/">１次遅れ系のステップ応答</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/">①電子回路入門</a>
+            <a href="/horitait/2015/07/26/control0/uncategorized/ciddp2p5v000ehu1aqq1rb1bk/">python入門⓪</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/">連続時間制御入門</a>
+            <a href="/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/">①電子回路入門</a>
           </li>
         
       </ul>

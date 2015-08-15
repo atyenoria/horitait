@@ -61,9 +61,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-kalman" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/horitait/2015/08/16/kalman/uncategorized/ciddp2p5q000ahu1a0lg8d01v/" class="article-date">
+  <time datetime="2015-08-15T23:23:43.000Z" itemprop="datePublished">2015-08-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/horitait/2015/08/16/kalman/uncategorized/ciddp2p5q000ahu1a0lg8d01v/">kalman filter</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kalman filter example demo in Python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A Python implementation of the example given in pages 11-15 of "An</span></span><br><span class="line"><span class="comment"># Introduction to the Kalman Filter" by Greg Welch and Gary Bishop,</span></span><br><span class="line"><span class="comment"># University of North Carolina at Chapel Hill, Department of Computer</span></span><br><span class="line"><span class="comment"># Science, TR 95-041,</span></span><br><span class="line"><span class="comment"># http://www.cs.unc.edu/~welch/kalman/kalmanIntro.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># by Andrew D. Straw</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> pylab</span><br><span class="line"></span><br><span class="line"><span class="comment"># intial parameters</span></span><br><span class="line">n_iter = <span class="number">50</span></span><br><span class="line">sz = (n_iter,) <span class="comment"># size of array</span></span><br><span class="line">x = -<span class="number">0.37727</span> <span class="comment"># truth value (typo in example at top of p. 13 calls this z)</span></span><br><span class="line">z = numpy.random.normal(x,<span class="number">0.1</span>,size=sz) <span class="comment"># observations (normal about x, sigma=0.1)</span></span><br><span class="line"></span><br><span class="line">Q = <span class="number">1e-5</span> <span class="comment"># process variance</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># allocate space for arrays</span></span><br><span class="line">xhat=numpy.zeros(sz)      <span class="comment"># a posteri estimate of x</span></span><br><span class="line">P=numpy.zeros(sz)         <span class="comment"># a posteri error estimate</span></span><br><span class="line">xhatminus=numpy.zeros(sz) <span class="comment"># a priori estimate of x</span></span><br><span class="line">Pminus=numpy.zeros(sz)    <span class="comment"># a priori error estimate</span></span><br><span class="line">K=numpy.zeros(sz)         <span class="comment"># gain or blending factor</span></span><br><span class="line"></span><br><span class="line">R = <span class="number">0.1</span>**<span class="number">2</span> <span class="comment"># estimate of measurement variance, change to see effect</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># intial guesses</span></span><br><span class="line">xhat[<span class="number">0</span>] = <span class="number">0.0</span></span><br><span class="line">P[<span class="number">0</span>] = <span class="number">1.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,n_iter):</span><br><span class="line">    <span class="comment"># time update</span></span><br><span class="line">    xhatminus[k] = xhat[k-<span class="number">1</span>]</span><br><span class="line">    Pminus[k] = P[k-<span class="number">1</span>]+Q</span><br><span class="line"></span><br><span class="line">    <span class="comment"># measurement update</span></span><br><span class="line">    K[k] = Pminus[k]/( Pminus[k]+R )</span><br><span class="line">    xhat[k] = xhatminus[k]+K[k]*(z[k]-xhatminus[k])</span><br><span class="line">    P[k] = (<span class="number">1</span>-K[k])*Pminus[k]</span><br><span class="line"></span><br><span class="line">pylab.figure()</span><br><span class="line">pylab.plot(z,<span class="string">'k+'</span>,label=<span class="string">'noisy measurements'</span>)</span><br><span class="line">pylab.plot(xhat,<span class="string">'b-'</span>,label=<span class="string">'a posteri estimate'</span>)</span><br><span class="line">pylab.axhline(x,color=<span class="string">'g'</span>,label=<span class="string">'truth value'</span>)</span><br><span class="line">pylab.legend()</span><br><span class="line">pylab.xlabel(<span class="string">'Iteration'</span>)</span><br><span class="line">pylab.ylabel(<span class="string">'Voltage'</span>)</span><br><span class="line"></span><br><span class="line">pylab.figure()</span><br><span class="line">valid_iter = range(<span class="number">1</span>,n_iter) <span class="comment"># Pminus not valid at step 0</span></span><br><span class="line">pylab.plot(valid_iter,Pminus[valid_iter],label=<span class="string">'a priori error estimate'</span>)</span><br><span class="line">pylab.xlabel(<span class="string">'Iteration'</span>)</span><br><span class="line">pylab.ylabel(<span class="string">'$(Voltage)^2$'</span>)</span><br><span class="line">pylab.setp(pylab.gca(),<span class="string">'ylim'</span>,[<span class="number">0</span>,.<span class="number">01</span>])</span><br><span class="line">pylab.show()</span><br></pre></td></tr></table></figure>
+<p><code>python</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atyenoria.github.io/horitait/2015/08/16/kalman/uncategorized/ciddp2p5q000ahu1a0lg8d01v/" data-id="ciddp2p5q000ahu1a0lg8d01v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-pidcontroll" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/" class="article-date">
+    <a href="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/" class="article-date">
   <time datetime="2015-08-02T09:42:23.000Z" itemprop="datePublished">2015-08-02</time>
 </a>
     
@@ -75,7 +115,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/">PID制御</a>
+      <a class="article-title" href="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/">PID制御</a>
     </h1>
   
 
@@ -84,15 +124,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> control <span class="keyword">import</span> matlab</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># PID 制御器</span></span><br><span class="line">Kp = <span class="number">10</span></span><br><span class="line">Ki = <span class="number">5</span></span><br><span class="line">Kd = <span class="number">1</span></span><br><span class="line">num = [Kd, Kp, Ki]</span><br><span class="line">den = [<span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">K = matlab.tf(num, den)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制御対象</span></span><br><span class="line">Kt = <span class="number">1</span></span><br><span class="line">J = <span class="number">0.01</span></span><br><span class="line">C = <span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">num = [Kt]</span><br><span class="line">den = [J, C, <span class="number">0</span>]</span><br><span class="line">G = matlab.tf(num, den)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># フィードバックループ</span></span><br><span class="line">sys = matlab.feedback(K*G)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = np.linspace(<span class="number">0</span>, <span class="number">3</span>, <span class="number">1000</span>)</span><br><span class="line">yout, T = matlab.step(sys, t)</span><br><span class="line">plt.plot(T, yout)</span><br><span class="line">plt.axhline(<span class="number">1</span>, color=<span class="string">"b"</span>, linestyle=<span class="string">"--"</span>)</span><br><span class="line">plt.xlim(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># yout, T = matlab.impulse(sys, t)</span></span><br><span class="line"><span class="comment"># plt.plot(T, yout)</span></span><br><span class="line"><span class="comment"># plt.axhline(0, color="b", linestyle="--")</span></span><br><span class="line"><span class="comment"># plt.xlim(0, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.show()</span></span><br></pre></td></tr></table></figure>
-<img src="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/pid1.png" alt=" arudino simulation" title=" arudino simulation">
-<img src="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/pid2.png" alt=" arudino simulation" title=" arudino simulation">
-<img src="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/pid3.png" alt=" arudino simulation" title=" arudino simulation">
-<img src="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/pid4.png" alt=" arudino simulation" title=" arudino simulation">
-<img src="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/pid5.png" alt=" arudino simulation" title=" arudino simulation">
+<img src="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/pid1.png" alt=" arudino simulation" title=" arudino simulation">
+<img src="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/pid2.png" alt=" arudino simulation" title=" arudino simulation">
+<img src="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/pid3.png" alt=" arudino simulation" title=" arudino simulation">
+<img src="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/pid4.png" alt=" arudino simulation" title=" arudino simulation">
+<img src="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/pid5.png" alt=" arudino simulation" title=" arudino simulation">
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/" data-id="cicuayxw600080p1ae7egid35" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/" data-id="ciddp2p5c0008hu1a2t5kb8ur" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -106,7 +146,7 @@
   
     <article id="post-contro3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/" class="article-date">
+    <a href="/horitait/2015/08/02/contro3/uncategorized/ciddp2p5y000ghu1aq8dd3ap9/" class="article-date">
   <time datetime="2015-08-02T09:40:59.000Z" itemprop="datePublished">2015-08-02</time>
 </a>
     
@@ -118,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/">１次遅れ系のステップ応答</a>
+      <a class="article-title" href="/horitait/2015/08/02/contro3/uncategorized/ciddp2p5y000ghu1aq8dd3ap9/">１次遅れ系のステップ応答</a>
     </h1>
   
 
@@ -130,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/" data-id="cicuayxwq000e0p1aciw46owy" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/08/02/contro3/uncategorized/ciddp2p5y000ghu1aq8dd3ap9/" data-id="ciddp2p5y000ghu1aq8dd3ap9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -144,7 +184,7 @@
   
     <article id="post-control0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/" class="article-date">
+    <a href="/horitait/2015/07/26/control0/uncategorized/ciddp2p5v000ehu1aqq1rb1bk/" class="article-date">
   <time datetime="2015-07-26T09:23:17.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -156,7 +196,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/">python入門⓪</a>
+      <a class="article-title" href="/horitait/2015/07/26/control0/uncategorized/ciddp2p5v000ehu1aqq1rb1bk/">python入門⓪</a>
     </h1>
   
 
@@ -169,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/" data-id="cicuayxwo000c0p1aao47ty6o" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/control0/uncategorized/ciddp2p5v000ehu1aqq1rb1bk/" data-id="ciddp2p5v000ehu1aqq1rb1bk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -183,7 +223,7 @@
   
     <article id="post-circuit1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/" class="article-date">
+    <a href="/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/" class="article-date">
   <time datetime="2015-07-25T23:22:24.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -195,7 +235,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/">①電子回路入門</a>
+      <a class="article-title" href="/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/">①電子回路入門</a>
     </h1>
   
 
@@ -204,13 +244,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<img src="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/motor.gif" alt=" arudino simulation" title=" arudino simulation">
-<img src="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/circuit_real.png" alt=" circuit figure" title=" circuit figure">
+<img src="/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/motor.gif" alt=" arudino simulation" title=" arudino simulation">
+<img src="/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/circuit_real.png" alt=" circuit figure" title=" circuit figure">
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/" data-id="cicuayxws000g0p1agu52acuf" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/" data-id="ciddp2p60000ihu1amnn23anw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -224,7 +264,7 @@
   
     <article id="post-control1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/" class="article-date">
+    <a href="/horitait/2015/07/26/control1/uncategorized/ciddp2p5r000chu1a7pok5f28/" class="article-date">
   <time datetime="2015-07-25T23:02:25.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -236,7 +276,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/">連続時間制御入門</a>
+      <a class="article-title" href="/horitait/2015/07/26/control1/uncategorized/ciddp2p5r000chu1a7pok5f28/">連続時間制御入門</a>
     </h1>
   
 
@@ -245,13 +285,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="倒立振子の連続時間制御">倒立振子の連続時間制御</h2><img src="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/pend.gif" alt="倒立振子のデジタル制御" title="倒立振子のデジタル制御">
+<h2 id="倒立振子の連続時間制御">倒立振子の連続時間制御</h2><img src="/horitait/2015/07/26/control1/uncategorized/ciddp2p5r000chu1a7pok5f28/pend.gif" alt="倒立振子の連続時間" title="倒立振子の連続時間">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin, cos, pi</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> matrix, array</span><br><span class="line"><span class="keyword">from</span> control.matlab <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">M = .<span class="number">6</span>  <span class="comment"># mass of cart+pendulum</span></span><br><span class="line">m = .<span class="number">3</span>  <span class="comment"># mass of pendulum</span></span><br><span class="line">Km = <span class="number">2</span>  <span class="comment"># motor torque constant</span></span><br><span class="line">Kg = .<span class="number">01</span>  <span class="comment"># gear ratio</span></span><br><span class="line">R = <span class="number">6</span>  <span class="comment"># armiture resistance</span></span><br><span class="line">r = .<span class="number">01</span>  <span class="comment"># drive radiu3</span></span><br><span class="line">K1 = Km*Kg/(R*r)</span><br><span class="line">K2 = Km**<span class="number">2</span>*Kg**<span class="number">2</span>/(R*r**<span class="number">2</span>)</span><br><span class="line">l = .<span class="number">3</span>  <span class="comment"># length of pendulum to CG</span></span><br><span class="line">I = <span class="number">0.006</span>  <span class="comment"># inertia of the pendulum</span></span><br><span class="line">L = (I + m*l**<span class="number">2</span>)/(m*l)</span><br><span class="line">g = <span class="number">9.81</span>  <span class="comment"># gravity</span></span><br><span class="line">Vsat = <span class="number">20.</span>  <span class="comment"># saturation voltage</span></span><br><span class="line"></span><br><span class="line">A11 = -<span class="number">1</span> * Km**<span class="number">2</span>*Kg**<span class="number">2</span> / ((M - m*l/L)*R*r**<span class="number">2</span>)</span><br><span class="line">A12 = -<span class="number">1</span>*g*m*l / (L*(M - m*l/L))</span><br><span class="line">A31 = Km**<span class="number">2</span>*Kg**<span class="number">2</span> / (M*(L - m*l/M)*R*r**<span class="number">2</span>)</span><br><span class="line">A32 = g/(L-m*l/M)</span><br><span class="line">A = matrix([</span><br><span class="line">    [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, A11, A12, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">    [<span class="number">0</span>, A31, A32, <span class="number">0</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">B1 = Km*Kg/((M - m*l/L)*R*r)</span><br><span class="line">B2 = -<span class="number">1</span>*Km*Kg/(M*(L-m*l/M)*R*r)</span><br><span class="line"></span><br><span class="line">B = matrix([</span><br><span class="line">    [<span class="number">0</span>],</span><br><span class="line">    [B1],</span><br><span class="line">    [<span class="number">0</span>],</span><br><span class="line">    [B2]</span><br><span class="line">])</span><br><span class="line">Q = matrix([</span><br><span class="line">    [<span class="number">10000</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">10000</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">(K, X, E) = lqr(A, B, Q, R);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">constrain</span><span class="params">(theta)</span>:</span></span><br><span class="line">    theta = theta % (<span class="number">2</span>*pi)</span><br><span class="line">    <span class="keyword">if</span> theta &gt; pi:</span><br><span class="line">        theta = -<span class="number">2</span>*pi+theta</span><br><span class="line">    <span class="keyword">return</span> theta</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sat</span><span class="params">(Vsat, V)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> abs(V) &gt; Vsat:</span><br><span class="line">        <span class="keyword">return</span> Vsat * cmp(V, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> V</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">average</span><span class="params">(x)</span>:</span></span><br><span class="line">    x_i, k1, k2, k3, k4 = x</span><br><span class="line">    <span class="keyword">return</span> x_i + (k1 + <span class="number">2.0</span>*(k3 + k4) +  k2) / <span class="number">6.0</span></span><br><span class="line"></span><br><span class="line">theta = []</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pendulum</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, dt, init_conds, end)</span>:</span></span><br><span class="line">        self.dt = dt</span><br><span class="line">        self.t = <span class="number">0.0</span></span><br><span class="line">        self.x = init_conds[:]</span><br><span class="line">        self.end = end</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">derivative</span><span class="params">(self, u)</span>:</span></span><br><span class="line">        V = sat(Vsat, self.control(u))</span><br><span class="line">        <span class="comment">#x1 = x, x2 = x_dt, x3 = theta, x4 = theta_dt</span></span><br><span class="line">        x1, x2, x3, x4 = u</span><br><span class="line">        x1_dt, x3_dt =  x2, x4</span><br><span class="line">        x2_dt = (K1*V - K2*x2 - m*l*g*cos(x3)*sin(x3)/L + m*l*sin(x3)*x4**<span class="number">2</span>) / (M - m*l*cos(x3)**<span class="number">2</span>/L)</span><br><span class="line">        x4_dt = (g*sin(x3) - m*l*x4**<span class="number">2</span>*cos(x3)*sin(x3)/L - cos(x3)*(K1*V + K2*x2)/M) / (L - m*l*cos(x3)**<span class="number">2</span>/M)</span><br><span class="line">        x = [x1_dt, x2_dt, x3_dt, x4_dt]</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">control</span><span class="params">(self, u)</span>:</span></span><br><span class="line">        c = constrain(u[<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">if</span> c&gt;-pi/<span class="number">5</span> <span class="keyword">and</span> c&lt;pi/<span class="number">5</span>:</span><br><span class="line">            <span class="keyword">return</span> float(-K*matrix(u[<span class="number">0</span>:<span class="number">2</span>]+[c]+[u[<span class="number">3</span>]]).T)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.swing_up(u)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swing_up</span><span class="params">(self, u)</span>:</span></span><br><span class="line">        E0 = <span class="number">0.</span></span><br><span class="line">        k = <span class="number">1</span></span><br><span class="line">        w = (m*g*l/(<span class="number">4</span>*I))**(.<span class="number">5</span>)</span><br><span class="line">        E = m*g*l*(.<span class="number">5</span>*(u[<span class="number">3</span>]/w)**<span class="number">2</span> + cos(u[<span class="number">2</span>])-<span class="number">1</span>)</span><br><span class="line">        a = k*(E-E0)*cmp(u[<span class="number">3</span>]*cos(u[<span class="number">2</span>]), <span class="number">0</span>)</span><br><span class="line">        F = M*a</span><br><span class="line">        V = (F - K2*constrain(u[<span class="number">2</span>]))/K1</span><br><span class="line">        <span class="keyword">return</span> sat(Vsat, V)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rk4_step</span><span class="params">(self, dt)</span>:</span></span><br><span class="line">        dx = self.derivative(self.x)</span><br><span class="line">        k2 = [ dx_i*dt <span class="keyword">for</span> dx_i <span class="keyword">in</span> dx ]</span><br><span class="line"></span><br><span class="line">        xv = [x_i + delx0_i/<span class="number">2.0</span> <span class="keyword">for</span> x_i, delx0_i <span class="keyword">in</span> zip(self.x, k2)]</span><br><span class="line">        k3 = [ dx_i*dt <span class="keyword">for</span> dx_i <span class="keyword">in</span> self.derivative(xv)]</span><br><span class="line"></span><br><span class="line">        xv = [x_i + delx1_i/<span class="number">2.0</span> <span class="keyword">for</span> x_i,delx1_i <span class="keyword">in</span> zip(self.x, k3)]</span><br><span class="line">        k4 = [ dx_i*dt <span class="keyword">for</span> dx_i <span class="keyword">in</span> self.derivative(xv) ]</span><br><span class="line"></span><br><span class="line">        xv = [x_i + delx1_2 <span class="keyword">for</span> x_i,delx1_2 <span class="keyword">in</span> zip(self.x, k4)]</span><br><span class="line">        k1 = [self.dt*i <span class="keyword">for</span> i <span class="keyword">in</span> self.derivative(xv)]</span><br><span class="line"></span><br><span class="line">        self.t += dt</span><br><span class="line">        self.x = map(average, zip(self.x, k1, k2, k3, k4))</span><br><span class="line">        theta.append(constrain(self.x[<span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integrate</span><span class="params">(self)</span>:</span></span><br><span class="line">        x = []</span><br><span class="line">        <span class="keyword">while</span> self.t &lt;= self.end:</span><br><span class="line">            self.rk4_step(self.dt)</span><br><span class="line">            x.append([self.t] + self.x)</span><br><span class="line">        <span class="keyword">return</span> array(x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin, cos, pi</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> example9 <span class="keyword">as</span> pendulum</span><br><span class="line"></span><br><span class="line"><span class="comment"># class Pendulum(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, dt, init_conds, end):</span></span><br><span class="line">pendulum = pendulum.Pendulum(</span><br><span class="line">    .<span class="number">001</span>,</span><br><span class="line">    [-<span class="number">0.5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    <span class="number">10</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">data = pendulum.integrate()</span><br><span class="line"><span class="keyword">print</span> data[<span class="number">1000</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"test"</span></span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(<span class="number">0</span>)</span><br><span class="line">fig.suptitle(<span class="string">"Pendulum on Cart"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cart_time_line = plt.subplot2grid(</span><br><span class="line">    (<span class="number">12</span>, <span class="number">12</span>),</span><br><span class="line">    (<span class="number">9</span>, <span class="number">0</span>),</span><br><span class="line">    colspan=<span class="number">12</span>,</span><br><span class="line">    rowspan=<span class="number">3</span></span><br><span class="line">)</span><br><span class="line">cart_time_line.axis([</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    <span class="number">10</span>,</span><br><span class="line">    min(data[:,<span class="number">1</span>])*<span class="number">1.1</span>,</span><br><span class="line">    max(data[:,<span class="number">1</span>])*<span class="number">1.1</span>+.<span class="number">1</span>,</span><br><span class="line">])</span><br><span class="line">cart_time_line.set_xlabel(<span class="string">'time (s)'</span>)</span><br><span class="line">cart_time_line.set_ylabel(<span class="string">'x (m)'</span>)</span><br><span class="line">cart_time_line.plot(data[:,<span class="number">0</span>], data[:,<span class="number">1</span>],<span class="string">'r-'</span>)</span><br><span class="line"></span><br><span class="line">pendulum_time_line = cart_time_line.twinx()</span><br><span class="line">pendulum_time_line.axis([</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    <span class="number">10</span>,</span><br><span class="line">    min(data[:,<span class="number">3</span>])*<span class="number">1.1</span>-.<span class="number">1</span>,</span><br><span class="line">    max(data[:,<span class="number">3</span>])*<span class="number">1.1</span></span><br><span class="line">])</span><br><span class="line">pendulum_time_line.set_ylabel(<span class="string">'theta (rad)'</span>)</span><br><span class="line">pendulum_time_line.plot(data[:,<span class="number">0</span>], data[:,<span class="number">3</span>],<span class="string">'g-'</span>)</span><br><span class="line"></span><br><span class="line">cart_plot = plt.subplot2grid(</span><br><span class="line">    (<span class="number">12</span>,<span class="number">12</span>),</span><br><span class="line">    (<span class="number">0</span>,<span class="number">0</span>),</span><br><span class="line">    rowspan=<span class="number">8</span>,</span><br><span class="line">    colspan=<span class="number">12</span></span><br><span class="line">)</span><br><span class="line">cart_plot.axes.get_yaxis().set_visible(<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">time_bar, = cart_time_line.plot([<span class="number">0</span>,<span class="number">0</span>], [<span class="number">10</span>, -<span class="number">10</span>], lw=<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_point</span><span class="params">(point)</span>:</span></span><br><span class="line">    time_bar.set_xdata([t, t])</span><br><span class="line">    cart_plot.cla()</span><br><span class="line">    cart_plot.axis([-<span class="number">1.1</span>,.<span class="number">1</span>,-.<span class="number">5</span>,.<span class="number">5</span>])</span><br><span class="line">    cart_plot.plot([point[<span class="number">1</span>]-.<span class="number">1</span>,point[<span class="number">1</span>]+.<span class="number">1</span>],[<span class="number">0</span>,<span class="number">0</span>],<span class="string">'r-'</span>,lw=<span class="number">5</span>)</span><br><span class="line">    cart_plot.plot([point[<span class="number">1</span>],point[<span class="number">1</span>]+.<span class="number">4</span>*sin(point[<span class="number">3</span>])],[<span class="number">0</span>,.<span class="number">4</span>*cos(point[<span class="number">3</span>])],<span class="string">'g-'</span>, lw=<span class="number">4</span>)</span><br><span class="line">t = <span class="number">0</span></span><br><span class="line">fps = <span class="number">10.</span></span><br><span class="line">frame_number = <span class="number">1</span></span><br><span class="line"><span class="keyword">print</span> os.system(<span class="string">"rm -rf img/* &amp;&amp; rm out.mp4"</span>)</span><br><span class="line"><span class="keyword">for</span> point <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">if</span> point[<span class="number">0</span>] &gt;= t + <span class="number">1.</span>/fps <span class="keyword">or</span> <span class="keyword">not</span> t:</span><br><span class="line">        draw_point(point)</span><br><span class="line">        t = point[<span class="number">0</span>]</span><br><span class="line">        fig.savefig(<span class="string">'img/_tmp%03d.png'</span> % frame_number)</span><br><span class="line">        frame_number += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> os.system(<span class="string">"ffmpeg -framerate 10 -i img/_tmp%03d.png  -c:v libx264 -r 30 -pix_fmt yuv420p out.mp4"</span>)</span><br><span class="line"><span class="keyword">print</span> os.system(<span class="string">"mpv out.mp4"</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/" data-id="cicuayxwj000a0p1abqam7sno" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/control1/uncategorized/ciddp2p5r000chu1a7pok5f28/" data-id="ciddp2p5r000chu1a7pok5f28" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a></li></ul>
@@ -265,7 +306,7 @@
   
     <article id="post-python2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/python2/uncategorized/cicuayxvu00030p1azyh1gm34/" class="article-date">
+    <a href="/horitait/2015/07/26/python2/uncategorized/ciddp2p510003hu1ab48qbnn0/" class="article-date">
   <time datetime="2015-07-25T22:29:14.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -277,7 +318,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/26/python2/uncategorized/cicuayxvu00030p1azyh1gm34/">単純ベイズ</a>
+      <a class="article-title" href="/horitait/2015/07/26/python2/uncategorized/ciddp2p510003hu1ab48qbnn0/">単純ベイズ</a>
     </h1>
   
 
@@ -290,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python2/uncategorized/cicuayxvu00030p1azyh1gm34/" data-id="cicuayxvu00030p1azyh1gm34" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python2/uncategorized/ciddp2p510003hu1ab48qbnn0/" data-id="ciddp2p510003hu1ab48qbnn0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a></li></ul>
@@ -304,7 +345,7 @@
   
     <article id="post-python1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/" class="article-date">
+    <a href="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/" class="article-date">
   <time datetime="2015-07-25T21:37:02.000Z" itemprop="datePublished">2015-07-26</time>
 </a>
     
@@ -316,7 +357,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/">python入門②</a>
+      <a class="article-title" href="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/">python入門②</a>
     </h1>
   
 
@@ -326,14 +367,14 @@
       
         <hr>
 <h3 id="高速フーリエ変換の例">高速フーリエ変換の例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> arange, hamming, sin, pi</span><br><span class="line"><span class="keyword">from</span> scipy.fftpack <span class="keyword">import</span> fft, ifft</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> pl</span><br><span class="line"></span><br><span class="line"><span class="comment">#set frequency and length</span></span><br><span class="line">fs = <span class="number">8000</span></span><br><span class="line">L = <span class="number">1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#create sinusoidal wave</span></span><br><span class="line">sine_440 = sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">440.</span> / fs)</span><br><span class="line">sine_600 = <span class="number">2</span> * sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">600.</span> / fs)</span><br><span class="line">sine_800 = <span class="number">3</span> * sin(<span class="number">2.</span> * pi * arange(L) * <span class="number">800.</span> / fs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#add created sinusoidal waves</span></span><br><span class="line">sig = sine_440 + sine_600 + sine_800</span><br><span class="line"></span><br><span class="line"><span class="comment">#create window</span></span><br><span class="line">win = hamming(L)</span><br><span class="line"></span><br><span class="line"><span class="comment">#fft with no window</span></span><br><span class="line">spectrum_nw = fft(sig)</span><br><span class="line"></span><br><span class="line"><span class="comment">#fft with  window</span></span><br><span class="line">spectrum = fft(sig * win)</span><br><span class="line"></span><br><span class="line"><span class="comment">#spectrum with no window</span></span><br><span class="line">half_spectrum_nw = abs(spectrum_nw[: L / <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#spectrum with  window</span></span><br><span class="line">half_spectrum = abs(spectrum[: L / <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#inverse fft</span></span><br><span class="line">resyn_sig = ifft(spectrum)</span><br><span class="line">resyn_sig /= win</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#plot setting</span></span><br><span class="line">fig = pl.figure()</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 1</span></span><br><span class="line">fig.add_subplot(<span class="number">411</span>)</span><br><span class="line">pl.plot(sig)</span><br><span class="line">pl.xlim([<span class="number">0</span>, L])</span><br><span class="line">pl.title(<span class="string">"1. Input signal"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 2</span></span><br><span class="line">fig.add_subplot(<span class="number">412</span>)</span><br><span class="line">pl.plot(half_spectrum_nw)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(half_spectrum_nw)])</span><br><span class="line">pl.title(<span class="string">"2. Spectrum (no window)"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 3</span></span><br><span class="line">fig.add_subplot(<span class="number">413</span>)</span><br><span class="line">pl.plot(half_spectrum)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(half_spectrum)])</span><br><span class="line">pl.title(<span class="string">"3. Spectrum (with window)"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#block 4</span></span><br><span class="line">fig.add_subplot(<span class="number">414</span>)</span><br><span class="line">pl.plot(resyn_sig)</span><br><span class="line">pl.xlim([<span class="number">0</span>, L])</span><br><span class="line">pl.title(<span class="string">"4. Resynthesized signal"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
-<h3 id="株価を用いた時系列解析">株価を用いた時系列解析</h3><img src="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/graph1.png" alt="ステップ1" title="ステップ1">
-<img src="/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/graph2.png" alt="ステップ2" title="ステップ2">
+<h3 id="株価を用いた時系列解析">株価を用いた時系列解析</h3><img src="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/graph1.png" alt="ステップ1" title="ステップ1">
+<img src="/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/graph2.png" alt="ステップ2" title="ステップ2">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> pandas.io.data <span class="keyword">as</span> web</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab <span class="keyword">as</span> pl</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> norm</span><br><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#use Apple Inc., Dell Inc.</span></span><br><span class="line">names = [<span class="string">'AAPL'</span>,<span class="string">'DELL'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#scrape stock price</span></span><br><span class="line">price = web.get_data_yahoo(names[<span class="number">0</span>], <span class="string">'2009-12-31'</span>)[<span class="string">'Adj Close'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#add noise to price</span></span><br><span class="line">price_noise1=normal(<span class="number">0</span>,<span class="number">3</span>,len(price)) + price</span><br><span class="line"></span><br><span class="line">returns = price.pct_change(periods=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#calculate moving average</span></span><br><span class="line">price_moving_average = pd.rolling_mean(price,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#calculate return index</span></span><br><span class="line">ret_index = (<span class="number">1</span> + returns).cumprod()</span><br><span class="line">ret_index[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### show data in cosole</span></span><br><span class="line"><span class="comment"># print price</span></span><br><span class="line"><span class="comment"># print price_noise1</span></span><br><span class="line"><span class="comment"># print returns</span></span><br><span class="line"><span class="comment"># print ret_index</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### plot data</span></span><br><span class="line">pl.plot(price)</span><br><span class="line">pl.plot(price_noise1)</span><br><span class="line">pl.plot(returns)</span><br><span class="line">pl.plot(ret_index)</span><br><span class="line">pl.plot(price_moving_average)</span><br><span class="line">pl.xlim([<span class="number">0</span>, len(price)])</span><br><span class="line">pl.title(<span class="string">"Transition of the stock price"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line">pl.xlabel(<span class="string">"Time (day)"</span>)</span><br><span class="line">pl.ylabel(<span class="string">"Price ($)"</span>)</span><br><span class="line">pl.savefig(<span class="string">"graph1.png"</span>)</span><br><span class="line">pl.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###histogram</span></span><br><span class="line">pl.hist(price, bins=<span class="number">100</span>)</span><br><span class="line">pl.xlabel(<span class="string">"Frequency(bin=100)"</span>)</span><br><span class="line">pl.ylabel(<span class="string">"Price ($)"</span>)</span><br><span class="line">pl.savefig(<span class="string">"graph2.png"</span>)</span><br><span class="line">pl.show()</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/cicuayxvy00060p1anb5guz20/" data-id="cicuayxvy00060p1anb5guz20" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/26/python1/uncategorized/ciddp2p530006hu1atf7pkjej/" data-id="ciddp2p530006hu1atf7pkjej" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -347,7 +388,7 @@
   
     <article id="post-2015-07-19-shell-beginnner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicuayxvg00000p1ary3nmozc/" class="article-date">
+    <a href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/ciddp2p4n0000hu1a4e3hzic0/" class="article-date">
   <time datetime="2015-07-19T02:21:50.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -359,7 +400,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicuayxvg00000p1ary3nmozc/">シェルスクリプト基礎①</a>
+      <a class="article-title" href="/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/ciddp2p4n0000hu1a4e3hzic0/">シェルスクリプト基礎①</a>
     </h1>
   
 
@@ -373,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/cicuayxvg00000p1ary3nmozc/" data-id="cicuayxvg00000p1ary3nmozc" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/2015-07-19-shell-beginnner/uncategorized/ciddp2p4n0000hu1a4e3hzic0/" data-id="ciddp2p4n0000hu1a4e3hzic0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -387,7 +428,7 @@
   
     <article id="post-20150719-python-control-beginner" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicuayxxd000l0p1ak15h3mf3/" class="article-date">
+    <a href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/ciddp2p6l000nhu1aydpl78c3/" class="article-date">
   <time datetime="2015-07-18T18:07:38.000Z" itemprop="datePublished">2015-07-19</time>
 </a>
     
@@ -399,7 +440,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicuayxxd000l0p1ak15h3mf3/">python入門①</a>
+      <a class="article-title" href="/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/ciddp2p6l000nhu1aydpl78c3/">python入門①</a>
     </h1>
   
 
@@ -417,48 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/cicuayxxd000l0p1ak15h3mf3/" data-id="cicuayxxd000l0p1ak15h3mf3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-20150719-git-beginner" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicuayxxi000p0p1atr0jszyl/" class="article-date">
-  <time datetime="2015-07-18T17:33:50.000Z" itemprop="datePublished">2015-07-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicuayxxi000p0p1atr0jszyl/">git 入門①</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="基本操作">基本操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#レポジトリ作成</span></span><br><span class="line">git init </span><br><span class="line"></span><br><span class="line"><span class="comment">#ステージングエリアにあげる</span></span><br><span class="line">git add ファイル名</span><br><span class="line"></span><br><span class="line"><span class="comment">#コミット</span></span><br><span class="line">git commit -m コミット名</span><br><span class="line"></span><br><span class="line"><span class="comment">#１つ前のコミットと統合</span></span><br><span class="line">git commit --amend -m コミット名</span><br><span class="line"></span><br><span class="line"><span class="comment">#ログの確認</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ログの確認（簡略化）</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#現在の状態</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment">#次のコミットで反映される場所の確認</span></span><br><span class="line">git diff --cached</span><br><span class="line"></span><br><span class="line"><span class="comment">#変更箇所の確認</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#git addの取り消し</span></span><br><span class="line">git reset HEAD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#直前のコミットに戻る</span></span><br><span class="line">git reset --hard HEAD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ブランチ作成</span></span><br><span class="line">git branch ブランチ名</span><br><span class="line"></span><br><span class="line"><span class="comment">#ブランチ一覧表示</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment">#ブランチの削除</span></span><br><span class="line">git branch <span class="operator">-d</span> ブランチ名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#他のブランチを現在のブランチに取り込む</span></span><br><span class="line">git merge ブランチ名</span><br></pre></td></tr></table></figure>
-<h2 id="githubの使い方">githubの使い方</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#githubで新規レポジトリの作成を行う</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin 自分のレポジトリ</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-git-beginner/uncategorized/cicuayxxi000p0p1atr0jszyl/" data-id="cicuayxxi000p0p1atr0jszyl" class="article-share-link">Share</a>
+      <a data-url="http://atyenoria.github.io/horitait/2015/07/19/20150719-python-control-beginner/uncategorized/ciddp2p6l000nhu1aydpl78c3/" data-id="ciddp2p6l000nhu1aydpl78c3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a></li></ul>
@@ -485,7 +485,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">8</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-中級/">IOT-中級</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初期設定/">IOT-初期設定</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/horitait/tags/IOT-初級/">IOT-初級</a><span class="tag-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -496,7 +496,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/08/">August 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/horitait/archives/2015/07/">July 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -508,23 +508,23 @@
       <ul>
         
           <li>
-            <a href="/horitait/2015/08/02/pidcontroll/uncategorized/cicuayxw600080p1ae7egid35/">PID制御</a>
+            <a href="/horitait/2015/08/16/kalman/uncategorized/ciddp2p5q000ahu1a0lg8d01v/">kalman filter</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/08/02/contro3/uncategorized/cicuayxwq000e0p1aciw46owy/">１次遅れ系のステップ応答</a>
+            <a href="/horitait/2015/08/02/pidcontroll/uncategorized/ciddp2p5c0008hu1a2t5kb8ur/">PID制御</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/control0/uncategorized/cicuayxwo000c0p1aao47ty6o/">python入門⓪</a>
+            <a href="/horitait/2015/08/02/contro3/uncategorized/ciddp2p5y000ghu1aq8dd3ap9/">１次遅れ系のステップ応答</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/circuit1/uncategorized/cicuayxws000g0p1agu52acuf/">①電子回路入門</a>
+            <a href="/horitait/2015/07/26/control0/uncategorized/ciddp2p5v000ehu1aqq1rb1bk/">python入門⓪</a>
           </li>
         
           <li>
-            <a href="/horitait/2015/07/26/control1/uncategorized/cicuayxwj000a0p1abqam7sno/">連続時間制御入門</a>
+            <a href="/horitait/2015/07/26/circuit1/uncategorized/ciddp2p60000ihu1amnn23anw/">①電子回路入門</a>
           </li>
         
       </ul>
